@@ -4,7 +4,7 @@ import importlib
 def get_ft_ckpts(base_model):
     model_name = base_model.split('/')[-1]
     task_names = ['instruction', 'math', 'coding', 'safety', 'multilingual']
-    return [f'MergeBench/{model_name}_{task_name}' for task_name in task_names]
+    return [f'MergeBench/gemma-2-2b_{task_name}' for task_name in task_names]
 
 def parse_args():
     parser = create_parser()
