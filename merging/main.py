@@ -3,7 +3,7 @@ import importlib
 
 def get_ft_ckpts(base_model):
     model_name = base_model.split('/')[-1]
-    task_names = ['instruction', 'coding', 'safety', 'multilingual']
+    task_names = ['instruction', 'coding', 'safety','math', 'multilingual']
     return [f'MergeBench/Llama-3.2-3B_{task_name}' for task_name in task_names]
 
 def parse_args():
