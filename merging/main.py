@@ -28,7 +28,7 @@ def main(args):
     else:
         task_group = None
 
-    save_path = args.save_path + args.base_model.split('/')[1] + '_merged/' + args.algo
+    save_path = args.save_path + "/" + args.algo
     if task_group:
         save_path += '_task_names_' + task_group
     if kwargs_str != '':
