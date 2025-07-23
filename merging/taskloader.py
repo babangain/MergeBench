@@ -63,7 +63,7 @@ class WildguardMix(TaskLoader):
                             bf16=True,
                             dataset_num_proc=48,
                             packing=True,
-                            max_seq_length=4096, # 4096
+                            max_seq_length=1024, # 1024
                             gradient_checkpointing=True,
                             per_device_train_batch_size=1,
                             output_dir="./tmp",
@@ -98,7 +98,7 @@ class MagiCoder(TaskLoader):
                             bf16=True,
                             dataset_num_proc=48,
                             packing=True,
-                            max_seq_length=4096, # 4096
+                            max_seq_length=1024, # 1024
                             gradient_checkpointing=True,
                             per_device_train_batch_size=1,
                             output_dir="./tmp",
@@ -168,7 +168,7 @@ class DartMath(TaskLoader):
                             bf16=True,
                             dataset_num_proc=48,
                             packing=True,
-                            max_seq_length=4096, 
+                            max_seq_length=1024, 
                             gradient_checkpointing=True,
                             per_device_train_batch_size=1,
                             output_dir="./tmp",
