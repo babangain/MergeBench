@@ -1,8 +1,8 @@
 from datasets import load_dataset
 from trl import SFTConfig, SFTTrainer
 
-cache_dir = '/data/huggingface'
-
+cache_dir = './data/huggingface'
+CONFIG_FILE='/home/.cache/huggingface/accelerate/default_config.yaml
 def formatting_prompts_func(examples, instruction_key='instruction', input_key='input', output_key='output'):
     # alpaca style prompts
     # also works for gpteacher because gpteacher inherits alpaca prompt
@@ -66,8 +66,8 @@ class WildguardMix(TaskLoader):
                             max_seq_length=4096, # 4096
                             gradient_checkpointing=True,
                             per_device_train_batch_size=1,
-                            deepspeed='/home/cindy2000_sh/MergeBench/deepspeed_configs/zero3.json',
-                            output_dir="/home/cindy2000_sh/MergeBench/tmp",
+                            deepspeed=CONFIG_FILE,
+                            output_dir="./tmp",
                             save_strategy='no',
                         ) 
 
@@ -101,8 +101,8 @@ class MagiCoder(TaskLoader):
                             max_seq_length=4096, # 4096
                             gradient_checkpointing=True,
                             per_device_train_batch_size=1,
-                            deepspeed='/home/cindy2000_sh/MergeBench/deepspeed_configs/zero3.json',
-                            output_dir="/home/cindy2000_sh/MergeBench/tmp",
+                            deepspeed=CONFIG_FILE,
+                            output_dir="./tmp",
                             save_strategy='no',
                         ) 
 
@@ -137,8 +137,8 @@ class Aya(TaskLoader):
                             max_seq_length=256, 
                             gradient_checkpointing=True,
                             per_device_train_batch_size=1,
-                            deepspeed='/home/cindy2000_sh/MergeBench/deepspeed_configs/zero3.json',
-                            output_dir="/home/cindy2000_sh/MergeBench/tmp",
+                            deepspeed=CONFIG_FILE,
+                            output_dir="./tmp",
                             save_strategy='no',
                         ) 
 
@@ -171,8 +171,8 @@ class DartMath(TaskLoader):
                             max_seq_length=4096, 
                             gradient_checkpointing=True,
                             per_device_train_batch_size=1,
-                            deepspeed='/home/cindy2000_sh/MergeBench/deepspeed_configs/zero3.json',
-                            output_dir="/home/cindy2000_sh/MergeBench/tmp",
+                            deepspeed=CONFIG_FILE,
+                            output_dir="./tmp",
                             save_strategy='no',
                         ) 
 
@@ -205,8 +205,8 @@ class Tulu3IF(TaskLoader):
                             max_seq_length=1024, 
                             gradient_checkpointing=True,
                             per_device_train_batch_size=1,
-                            deepspeed='/home/cindy2000_sh/MergeBench/deepspeed_configs/zero3.json',
-                            output_dir="/home/cindy2000_sh/MergeBench/tmp",
+                            deepspeed=CONFIG_FILE,
+                            output_dir="./tmp",
                             save_strategy='no',
                         ) 
 
