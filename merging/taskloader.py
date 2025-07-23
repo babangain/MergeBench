@@ -2,7 +2,7 @@ from datasets import load_dataset
 from trl import SFTConfig, SFTTrainer
 
 cache_dir = './data/huggingface'
-CONFIG_FILE='/home/.cache/huggingface/accelerate/default_config.yaml
+CONFIG_FILE='/home/.cache/huggingface/accelerate/default_config.yaml'
 def formatting_prompts_func(examples, instruction_key='instruction', input_key='input', output_key='output'):
     # alpaca style prompts
     # also works for gpteacher because gpteacher inherits alpaca prompt
