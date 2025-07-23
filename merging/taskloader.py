@@ -68,6 +68,7 @@ class WildguardMix(TaskLoader):
                             per_device_train_batch_size=1,
                             output_dir="./tmp",
                             save_strategy='no',
+                            deepspeed=CONFIG_FILE
                         ) 
 
         self.training_dataset = load_dataset('MergeBench/safety_val',cache_dir=cache_dir)
@@ -102,6 +103,7 @@ class MagiCoder(TaskLoader):
                             per_device_train_batch_size=1,
                             output_dir="./tmp",
                             save_strategy='no',
+                            deepspeed=CONFIG_FILE
                         ) 
 
         self.training_dataset = load_dataset('MergeBench/code_val',cache_dir=cache_dir)
@@ -137,6 +139,7 @@ class Aya(TaskLoader):
                             per_device_train_batch_size=1,
                             output_dir="./tmp",
                             save_strategy='no',
+                            deepspeed=CONFIG_FILE
                         ) 
 
         self.training_dataset = load_dataset('MergeBench/multilingual_val',cache_dir=cache_dir)
@@ -170,6 +173,7 @@ class DartMath(TaskLoader):
                             per_device_train_batch_size=1,
                             output_dir="./tmp",
                             save_strategy='no',
+                            deepspeed=CONFIG_FILE
                         ) 
 
         self.training_dataset = load_dataset('MergeBench/math_val',cache_dir=cache_dir)
@@ -203,6 +207,7 @@ class Tulu3IF(TaskLoader):
                             per_device_train_batch_size=1,
                             output_dir="./tmp",
                             save_strategy='no',
+                            deepspeed=CONFIG_FILE
                         ) 
 
         self.training_dataset = load_dataset('MergeBench/if_val',cache_dir=cache_dir)
