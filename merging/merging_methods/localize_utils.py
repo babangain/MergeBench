@@ -37,7 +37,7 @@ class Localizer():
         self.model = AutoModelForCausalLM.from_pretrained(self.base_model_name, 
                                                     torch_dtype="bfloat16", attn_implementation="flash_attention_2", 
                                                     device_map='auto')
-        self.device_map = self.model.hf_device_map
+        #self.device_map = self.model.hf_device_map
 
 
     def create_topk_mask(self):
@@ -74,7 +74,7 @@ class Localizer():
         self.pretrained_model = AutoModelForCausalLM.from_pretrained(self.base_model_name, attn_implementation="flash_attention_2", 
                                                     torch_dtype="bfloat16")
         if train:
-            self.model = dispatch_model(self.model, device_map=self.device_map)
+            self.model = dispatch_model(self.model, device_map="auto")
 
         if round_:
             proportion = len(torch.nonzero(frac.bool())) / self.num_params
