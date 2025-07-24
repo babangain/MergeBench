@@ -106,7 +106,7 @@ class MagiCoder(TaskLoader):
                             deepspeed=CONFIG_FILE
                         ) 
 
-        self.training_dataset = load_dataset('MergeBench/code_val',cache_dir=cache_dir)
+        self.training_dataset = load_dataset('MergeBench/coding_val',cache_dir=cache_dir)
 
         if sample_size is None:
             self.training_dataset = self.training_dataset["train"]
