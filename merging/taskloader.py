@@ -210,7 +210,7 @@ class Tulu3IF(TaskLoader):
                             deepspeed=CONFIG_FILE
                         ) 
 
-        self.training_dataset = load_dataset('MergeBench/safety_val',cache_dir=cache_dir)
+        self.training_dataset = load_dataset('MergeBench/instruction_val',cache_dir=cache_dir)
 
         if sample_size is None:
             self.training_dataset = self.training_dataset['train']
