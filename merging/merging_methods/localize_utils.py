@@ -331,7 +331,7 @@ class Localizer():
             
             training_args = SFTConfig(
                             per_device_train_batch_size=2,
-                            packing=True,
+                            packing=False,
                             gradient_checkpointing=True,
                             save_strategy="no",
                             optim="adamw_torch_fused",
