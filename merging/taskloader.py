@@ -62,7 +62,7 @@ class WildguardMix(TaskLoader):
                             optim="adamw_torch",
                             bf16=True,
                             dataset_num_proc=48,
-                            packing=True,
+                            packing=False,
                             max_seq_length=4096, # 4096
                             gradient_checkpointing=True,
                             per_device_train_batch_size=1,
