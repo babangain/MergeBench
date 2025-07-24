@@ -354,7 +354,6 @@ class Localizer():
                 model=self.model,
                 args=training_args,
                 train_dataset=formatted_dataset,
-                dataset_text_field="text"  # this ensures trainer knows where the LM inputs are
                 )
             # trainer = SFTTrainer(
             #     model=self.model,
