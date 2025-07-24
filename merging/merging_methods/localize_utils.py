@@ -349,7 +349,7 @@ class Localizer():
                     }
                 )
         
-        # 2. Define SFTTrainer without formatting_func
+            # 2. Define SFTTrainer without formatting_func
             trainer = SFTTrainer(
                 model=self.model,
                 args=training_args,
