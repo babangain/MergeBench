@@ -342,15 +342,28 @@ class Localizer():
                             output_dir="output",
                             max_seq_length=3072,
                         )
-            
+
+            formatted_dataset = dataset.map(
+                lambda examples: {
+                "text": formatting_prompts_func(examples, **format_keys)
+                    }
+                )
+        
+        # 2. Define SFTTrainer without formatting_func
             trainer = SFTTrainer(
                 model=self.model,
                 args=training_args,
-                train_dataset=dataset,
-                formatting_func=lambda examples: formatting_prompts_func(
-                                    examples, **format_keys
-                                ),
-            )
+                train_dataset=formatted_dataset,
+                dataset_text_field="text"  # this ensures trainer knows where the LM inputs are
+                )
+            # trainer = SFTTrainer(
+            #     model=self.model,
+            #     args=training_args,
+            #     train_dataset=dataset,
+            #     formatting_func=lambda examples: formatting_prompts_func(
+            #                         examples, **format_keys
+            #                     ),
+            # )
             
             class GradientTrackingCallback(TrainerCallback):
                 def __init__(self):
