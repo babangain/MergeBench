@@ -37,7 +37,7 @@ class Localizer():
         self.model = AutoModelForCausalLM.from_pretrained(self.base_model_name, 
                                                     torch_dtype="bfloat16", attn_implementation="flash_attention_2", 
                                                     device_map='auto')
-        self.device_map = "cuda"
+        self.device_map = self.model.hf_device_map
 
 
     def create_topk_mask(self):
