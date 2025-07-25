@@ -3,40 +3,74 @@ from trl import SFTConfig, SFTTrainer
 
 cache_dir = './data/huggingface'
 CONFIG_FILE='/home/.cache/huggingface/accelerate/default_config.yaml'
+# def formatting_prompts_func(examples, instruction_key='instruction', input_key='input', output_key='output'):
+#     # alpaca style prompts
+#     # also works for gpteacher because gpteacher inherits alpaca prompt
+#     # https://github.com/huggingface/trl/pull/444#issue-1760952763
+#     instruction = examples[instruction_key]
+#     if 'input' in examples:
+#         input_text = examples[input_key]
+#     else:
+#         input_text = ''
+#     response = examples[output_key]
+
+#     if len(input_text) > 0:
+#         text = f'''Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
+        
+#         ### Instruction:
+#         {instruction}
+        
+#         ### Input:
+#         {input_text}
+        
+#         ### Response:
+#         {response}
+#         '''
+#     else:
+#         text = f'''Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
+        
+#         ### Instruction:
+#         {instruction}
+        
+#         ### Response:
+#         {response}
+#         '''
+
+#     return text
+
 def formatting_prompts_func(examples, instruction_key='instruction', input_key='input', output_key='output'):
-    # alpaca style prompts
-    # also works for gpteacher because gpteacher inherits alpaca prompt
-    # https://github.com/huggingface/trl/pull/444#issue-1760952763
+    """
+    Format examples into `prompt` and `completion` fields for SFTTrainer compatibility.
+    """
     instruction = examples[instruction_key]
-    if 'input' in examples:
-        input_text = examples[input_key]
-    else:
-        input_text = ''
+    input_text = examples.get(input_key, '')
     response = examples[output_key]
 
-    if len(input_text) > 0:
-        text = f'''Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
-        
-        ### Instruction:
-        {instruction}
-        
-        ### Input:
-        {input_text}
-        
-        ### Response:
-        {response}
-        '''
-    else:
-        text = f'''Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
-        
-        ### Instruction:
-        {instruction}
-        
-        ### Response:
-        {response}
-        '''
+    # Prompt construction
+    if input_text.strip():
+        prompt = f"""Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
 
-    return text
+### Instruction:
+{instruction}
+
+### Input:
+{input_text}
+
+### Response:
+"""
+    else:
+        prompt = f"""Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
+
+### Instruction:
+{instruction}
+
+### Response:
+"""
+
+    # Do not include the response in the prompt — separate field
+    completion = response.strip()
+
+    return {"prompt": prompt.strip(), "completion": completion}
 
 
 class TaskLoader:
