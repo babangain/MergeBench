@@ -265,7 +265,7 @@ class Localizer():
         # Load model on CPU first to save GPU memory
         self.model = AutoModelForCausalLM.from_pretrained(
             self.base_model_name, 
-            torch_dtype=torch.bfloat16, attn_implementation="flash_attention_2",
+            torch_dtype=torch.bfloat16, # attn_implementation="flash_attention_2",
             device_map="cpu"  # Explicitly load on CPU
         )
 
@@ -299,7 +299,7 @@ class Localizer():
         # Reload pretrained model on CPU
         self.pretrained_model = AutoModelForCausalLM.from_pretrained(
             self.base_model_name, 
-            torch_dtype=torch.bfloat16, attn_implementation="flash_attention_2",
+            torch_dtype=torch.bfloat16,# attn_implementation="flash_attention_2",
             device_map="cpu"
         )
         
