@@ -105,12 +105,22 @@ class WildguardMix(TaskLoader):
                             deepspeed=CONFIG_FILE
                         ) 
 
-        self.training_dataset = load_dataset('MergeBench/safety_val',cache_dir=cache_dir)
+        # Load dataset (entire split dict)
+        raw_dataset = load_dataset('MergeBench/safety_val', cache_dir=cache_dir)
         
+        # Define filter function to ensure response is a non-empty string
+        def is_valid_response(example):
+            return isinstance(example.get("response", ""), str) and example["response"].strip() != ""
+        
+        # Filter the 'train' split only
+        filtered_train = raw_dataset["train"].filter(is_valid_response)
+        
+        # Optionally sample the dataset
         if sample_size is None:
-            self.training_dataset = self.training_dataset["train"]
+            self.training_dataset = filtered_train
         else:
-            self.training_dataset = self.training_dataset["train"].shuffle(seed=42).select(range(sample_size))                     
+            self.training_dataset = filtered_train.shuffle(seed=42).select(range(sample_size))
+                           
         self.trainer = SFTTrainer(model=model,
                                   args=self.training_args,
                                   train_dataset=self.training_dataset,  
