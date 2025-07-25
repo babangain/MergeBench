@@ -344,10 +344,9 @@ class Localizer():
                         )
 
             formatted_dataset = dataset.map(
-                lambda examples: {
-                "text": formatting_prompts_func(examples, **format_keys)
-                    }
-                )
+                    lambda examples: formatting_prompts_func(examples, **format_keys)
+            )
+
         
             # 2. Define SFTTrainer without formatting_func
             trainer = SFTTrainer(
