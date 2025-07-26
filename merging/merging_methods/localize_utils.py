@@ -117,15 +117,15 @@ class Localizer():
                             output_dir="output",
                             max_seq_length=3072,
                         )
-            
+            formatted_dataset = dataset.map(
+                lambda example: {"text": formatting_prompts_func(example, **format_keys)}
+            )
+
             # Create SFTTrainer
             trainer = SFTTrainer(
                 model=self.model,
                 args=training_args,
-                train_dataset=dataset,
-                formatting_func=lambda examples: formatting_prompts_func(
-                                    examples, **format_keys
-                                ),
+                train_dataset=formatted_dataset,
             )
             
             # Define a callback to track gradients during training
