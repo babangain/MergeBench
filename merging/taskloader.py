@@ -69,7 +69,7 @@ def formatting_prompts_func(examples, instruction_key='instruction', input_key='
 
     # Do not include the response in the prompt — separate field
     completion = response
-    print(completion)
+    #print(completion)
 
     return {"prompt": prompt, "completion": completion}
 
@@ -116,9 +116,9 @@ class WildguardMix(TaskLoader):
 
         
         # Filter the 'train' split only
-        print("Num filtered examples:", len(filtered_train)) 
         filtered_train = raw_dataset["train"].filter(is_valid_response)
-        
+        print("Num filtered examples:", len(filtered_train)) 
+   
         # Optionally sample the dataset
         if sample_size is None:
             self.training_dataset = filtered_train
