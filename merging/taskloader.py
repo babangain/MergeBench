@@ -110,11 +110,12 @@ class WildguardMix(TaskLoader):
         
         # Define filter function to ensure response is a non-empty string
         def is_valid_response(example):
-            response = example.get("response", None)
-            return response is not None and isinstance(response, str) and response.strip() != ""
+            return example.get("response") is not None
+
 
         
         # Filter the 'train' split only
+        print("Num filtered examples:", len(filtered_train)) 
         filtered_train = raw_dataset["train"].filter(is_valid_response)
         
         # Optionally sample the dataset
