@@ -6,6 +6,7 @@ from taskloader import formatting_prompts_func
 from trl import SFTTrainer, SFTConfig
 from transformers import AutoModelForCausalLM, TrainerCallback
 from accelerate import dispatch_model
+from accelerate import infer_auto_device_map
 
 class Localizer():
     def __init__(self, trainable_params, pretrained_model, finetuned_model, graft_args, base_model_name):
@@ -38,8 +39,9 @@ class Localizer():
                                                     torch_dtype="bfloat16", 
                                                     device_map='auto')
         #self.device_map = self.model.hf_device_map
+        self.device_map = infer_auto_device_map(self.model, max_memory={0: "60GiB"})
         self.model = self.model.to("cuda")  
-        self.model = dispatch_model(self.model, device_map="auto")
+        self.model = dispatch_model(self.model, device_map=self.device_map)
 
 
     def create_topk_mask(self):
@@ -77,7 +79,7 @@ class Localizer():
                                                     torch_dtype="bfloat16")
         if train:
             self.model = self.model.to("cuda")
-            self.model = dispatch_model(self.model, device_map="auto")
+            self.model = dispatch_model(self.model, device_map=self.device_map)
 
         if round_:
             proportion = len(torch.nonzero(frac.bool())) / self.num_params
