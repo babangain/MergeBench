@@ -24,7 +24,6 @@ def formatting_prompts_func(examples, instruction_key='instruction', input_key='
         {input_text}
         
         ### Response:
-        {response}
         '''
     else:
         text = f'''Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
@@ -33,10 +32,9 @@ def formatting_prompts_func(examples, instruction_key='instruction', input_key='
         {instruction}
         
         ### Response:
-        {response}
         '''
 
-    return text
+    return {'text':text, 'completion': response}
 
 # def formatting_prompts_func(examples, instruction_key='instruction', input_key='input', output_key='output'):
 #     """
