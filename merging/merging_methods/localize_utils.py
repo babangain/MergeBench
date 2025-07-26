@@ -118,7 +118,7 @@ class Localizer():
                             max_seq_length=3072,
                         )
             formatted_dataset = dataset.map(
-                lambda example: {"text": formatting_prompts_func(example, **format_keys)}
+                lambda example: formatting_prompts_func(example, **format_keys)
             )
 
             # Create SFTTrainer
