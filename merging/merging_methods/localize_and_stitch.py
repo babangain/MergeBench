@@ -9,7 +9,7 @@ class LocalizeAndStitch(Merger):
     def __init__(self, base_model, ft_models, save_path):
         super().__init__(base_model, ft_models, save_path)
 
-        self.task_names = ['instruction', 'math', 'coding', 'safety', 'multilingual']
+        self.task_names = ['safety','instruction', 'math', 'coding', 'multilingual']
     
     def extract_format_keys(self, task):
         dataset = load_dataset(f'MergeBench/{task}_val', split='train')
