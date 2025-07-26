@@ -47,7 +47,7 @@ def formatting_prompts_func(examples, instruction_key='instruction', input_key='
     response = examples[output_key]
 
     # Prompt construction
-    if input_text.strip():
+    if input_text:
         prompt = f"""Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
 
 ### Instruction:
@@ -68,7 +68,7 @@ def formatting_prompts_func(examples, instruction_key='instruction', input_key='
 """
 
     # Do not include the response in the prompt — separate field
-    completion = response.strip()
+    completion = response
 
     return {"prompt": prompt, "completion": completion}
 
