@@ -69,6 +69,7 @@ def formatting_prompts_func(examples, instruction_key='instruction', input_key='
 
     # Do not include the response in the prompt — separate field
     completion = response
+    print(completion)
 
     return {"prompt": prompt, "completion": completion}
 
