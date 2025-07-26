@@ -50,7 +50,8 @@ class LocalizeAndStitch(Merger):
             if not dataless:
                 print(f'Training mask {current_task} model')
                 dataset, format_keys = self.extract_format_keys(self.task_names[i])
-
+                if current_task == 'safety':
+                    dataset = dataset.filter(lambda ex: ex.get("response") is not None)
                 localizer.train_mask(dataset, format_keys) 
             
             mask, _ = localizer.interpolate_model(round_=True, return_mask=True, train=False)
