@@ -29,10 +29,10 @@ def main(args):
         task_group = None
 
     save_path = args.save_path + "/" + args.algo
-    if task_group:
-        save_path += '_task_names_' + task_group
-    if kwargs_str != '':
-        save_path += '_' + kwargs_str
+    # if task_group:
+    #     save_path += '_task_names_' + task_group
+    # if kwargs_str != '':
+    #     save_path += '_' + kwargs_str
         
     print('merged model save to:',save_path)
     merger = getattr(merger_module, args.algo)(args.base_model, ft_ckpts, save_path)
